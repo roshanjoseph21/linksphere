@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'social/css/profile.css' %}">
+</head>
+<body style="background-color: #25c389;">
+    <section class="section about-section gray-bg" id="about">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-8">
+                    <div class="about-text go-to">
+                        <h3 class="dark-color">{{data}}</h3>
+                        {%if data.user == request.user%}
+                            <a class="text-decoration-none btn" href="{%url 'profile-update' data.id %}">Edit profile</a>
+                        {%endif%}
+                        <p>Bio: {{data.bio}}</p>
+                        <div class="row about-list">
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>Birthday</label>
+                                    <p>{{data.dob}}</p>
+                                </div> 
+                                <div class="media">
+                                    <label>Phone</label>
+                                    <p>{{data.phone}}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Address</label>
+                                    <p>{{data.address}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>Bio</label>
+                                    <p> {{data.bio}}</p>
+                                </div>
+                                {%if request.user != data.user%}
+                                <div class="media">
+                                    <form action="{%url 'block' data.id%}" method="post">
+                                    {%csrf_token%}
+                                    {%if data in request.user.profile.block.all%}
+                                    
+                                    <button type="submit" class="btn btn-rounded btn-success" name="action" value="unblock">Unblock</button>
+                                    {%else%}
+                                    <button type="submit" class="btn btn-rounded btn-danger" name="action" value="block">Block</button>
+
+                                    {%endif%}
+                                    </form>
+                                </div>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="about-avatar">
+                        {%if data.profile_pic%}
+                            <img src="{{data.profile_pic.url}}"alt="" height="400px" width="">
+                        {%else%}
+                             <img src="{%static 'social/images/profilepic.png' %}" title="" alt="">
+                        {%endif%}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="counter">
+                <div class="row">
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="500" data-speed="500">{{data.following.count}}</h6>
+                            <p class="m-0px font-w-600">Following</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="150" data-speed="150">{{data.followed_by.count}}</h6> <!-- folllowed_by is the realted name. refer model.py-->
+                            <p class="m-0px font-w-600">Follower</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="850" data-speed="850">{{data.blocked.all.count}}</h6>
+                            <p class="m-0px font-w-600">Blocked</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="190" data-speed="190">{{data.user.userpost.all.count}}</h6> <!-- refer post model .user related name-->
+                            <p class="m-0px font-w-600">Posts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

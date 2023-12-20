@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.nav{
+	background: #39e1d9;
+	background: -webkit-linear-gradient(to right, #23aabc, #7729ed);
+	background: linear-gradient(to right, #2770a7, #2a60b6);
+}
+
+body{
+  background: #1c8eda;
+  font-family: 'Open Sans', sans-serif;
+}
+.profile-small{
+    width:40px;
+    border-radius: 50%;
+    background-color: rgb(68, 68, 68);
+}
+.profile-xsmall{
+    width:20px;
+    border-radius: 50%;
+    background-color: rgb(68, 68, 68);
+}
+
+.comment input{
+    width: 27em;
+}
+.spa{
+	font-size: 12px;
+}
+
+.btn-group .btn-img{
+    margin-right: 7em;
+}
+
+.load{
+    display:none
+  }
+  .upload{
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    border: 2px dashed #888383;
+  }
+  
+  .upload:hover{
+    color: #890082;
+    border: 2px dashed #890082;
+  }
+  .post{
+    width: 40%;
+    background-color: #f0f1f2;
+  }
